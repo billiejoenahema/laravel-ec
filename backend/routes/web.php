@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LifeCycleTextController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::get('/service-container-test', [LifeCycleTextController::class, 'showServiceContainerTest']);
+
+require __DIR__ . '/auth.php';
