@@ -22,6 +22,4 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/service-container-test', [LifeCycleTextController::class, 'showServiceContainerTest']);
-
 require __DIR__ . '/auth.php';
