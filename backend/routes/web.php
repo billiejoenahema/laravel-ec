@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LifeCycleTextController;
+use App\Http\Controllers\SampleServiceController;
+use App\Providers\SampleServiceProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/sample-service-provider', [SampleServiceController::class, 'showSampleServiceTest']);
 
 require __DIR__ . '/auth.php';
