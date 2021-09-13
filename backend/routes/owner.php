@@ -23,11 +23,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('owner.welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('owner.dashboard');
 })->middleware(['auth:owners'])->name('dashboard');
 
 
@@ -71,7 +71,7 @@ Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke
     ->name('verification.verify');
 
 Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-    ->middleware(['auth:onwer', 'throttle:6,1'])
+    ->middleware(['auth:owner', 'throttle:6,1'])
     ->name('verification.send');
 
 Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
