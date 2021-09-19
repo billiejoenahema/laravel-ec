@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <section class="text-gray-600 body-font">
                         <div class="container px-5 mx-auto">
-                            <x-toast color="green-500" />
+                            <x-toast color="{{session('toast-color')}}" />
                             <div class="flex justify-end mb-4">
                                 <button onClick="location.href='{{route('admin.owners.create')}}'"
                                     class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">新規登録</button>
@@ -32,6 +32,9 @@
                                             <th
                                                 class="pl-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                                             </th>
+                                            <th
+                                                class="pl-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,6 +49,16 @@
                                                     class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-500 rounded">編集</button>
 
                                             </td>
+                                            <form id="delete_{{$owner->id}}" method="post"
+                                                action="{{route('admin.owners.destroy', ['owner' => $owner->id])}}">
+                                                @csrf
+                                                @method('delete')
+                                                <td class="pl-4 py-3">
+                                                    <a href="#" data-id="{{$owner->id}}" onclick="deletePost(this)"
+                                                        class="text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded">削除</a>
+
+                                                </td>
+                                            </form>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -57,4 +70,12 @@
             </div>
         </div>
     </div>
+    <script>
+        function deletePost(e) {
+            'use strict'
+            if (confirm('本当に削除してもよろしいですか？')) {
+                document.getElementById(`delete_${e.dataset.id}`).submit()
+            }
+        }
+    </script>
 </x-app-layout>
