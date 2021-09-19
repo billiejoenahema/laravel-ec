@@ -110,7 +110,7 @@ class OwnersController extends Controller
             ->route('admin.owners.index')
             ->with([
                 'message' => 'オーナー情報を更新しました。',
-                'color' => 'green-500'
+                'toast-color' => 'green-500'
             ]);
     }
 
@@ -128,7 +128,23 @@ class OwnersController extends Controller
             ->route('admin.owners.index')
             ->with([
                 'message' => 'オーナー情報を削除しました。',
-                'color' => 'red-500'
+                'toast-color' => 'red-500'
+            ]);
+    }
+
+    public function expiredOwnerIndex()
+    {
+        $expiredOwners = Owner::onlyTrashed()->get();
+        return view('admin.expired-owners', compact('expiredOwners'));
+    }
+
+    public function expiredOwnerDestroy($id)
+    {
+        Owner::onlyTrashed()->findOrFail($id)->forceDelete();
+        return redirect()->route('admin.expired-owners.index')
+            ->with([
+                'message' => 'オーナー情報を完全に削除しました。',
+                'toast-color' => 'red-500'
             ]);
     }
 }
