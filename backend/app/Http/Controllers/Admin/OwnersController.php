@@ -62,7 +62,10 @@ class OwnersController extends Controller
 
         return redirect()
             ->route('admin.owners.index')
-            ->with('message', 'オーナーを新規登録しました。');
+            ->with([
+                'message' => 'オーナーを新規登録しました。',
+                'toast-color' => 'green-500'
+            ]);
     }
 
     /**
@@ -105,7 +108,10 @@ class OwnersController extends Controller
 
         return redirect()
             ->route('admin.owners.index')
-            ->with('message', 'オーナー情報を更新しました。');
+            ->with([
+                'message' => 'オーナー情報を更新しました。',
+                'color' => 'green-500'
+            ]);
     }
 
     /**
@@ -116,6 +122,13 @@ class OwnersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Owner::findOrFail($id)->delete(); // soft delete
+
+        return redirect()
+            ->route('admin.owners.index')
+            ->with([
+                'message' => 'オーナー情報を削除しました。',
+                'color' => 'red-500'
+            ]);
     }
 }
