@@ -8,9 +8,9 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+                <div class="md:p-6 bg-white border-b border-gray-200">
                     <section class="text-gray-600 body-font">
-                        <div class="container px-5 mx-auto">
+                        <div class="container md:md:px-5 mx-auto">
                             <x-toast color="{{session('toast-color')}}" />
                             <div class="flex justify-end mb-4">
                                 <button onClick="location.href='{{route('admin.owners.create')}}'"
@@ -21,29 +21,29 @@
                                     <thead>
                                         <tr>
                                             <th
-                                                class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
                                                 name</th>
                                             <th
-                                                class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                                                 email</th>
                                             <th
-                                                class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                                                 created_at</th>
                                             <th
-                                                class="pl-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                class="md:pl-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                                             </th>
                                             <th
-                                                class="pl-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                class="md:pl-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($owners as $owner)
                                         <tr>
-                                            <td class="px-4 py-3">{{$owner->name}}</td>
-                                            <td class="px-4 py-3">{{$owner->email}}</td>
-                                            <td class="px-4 py-3">{{$owner->created_at->diffFOrHumans()}}</td>
-                                            <td class="pl-4 py-3">
+                                            <td class="md:px-4 py-3">{{$owner->name}}</td>
+                                            <td class="md:px-4 py-3">{{$owner->email}}</td>
+                                            <td class="md:px-4 py-3">{{$owner->created_at->diffFOrHumans()}}</td>
+                                            <td class="md:pl-4 py-3">
                                                 <button
                                                     onclick="location.href='{{route('admin.owners.edit', ['owner' => $owner->id])}}'"
                                                     class="text-white bg-indigo-400 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-500 rounded">編集</button>
