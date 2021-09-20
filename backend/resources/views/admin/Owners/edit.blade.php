@@ -41,6 +41,15 @@
                                         </div>
                                         <div class="p-2 w-1/2 mx-auto">
                                             <div class="relative">
+                                                <label for="shop" class="leading-7 text-sm text-gray-600">店名</label>
+                                                <div
+                                                    class="w-full rounded text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                    {{$owner->shop->name}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-2 w-1/2 mx-auto">
+                                            <div class="relative">
                                                 <label for="password"
                                                     class="leading-7 text-sm text-gray-600">パスワード</label>
                                                 <input type="password" id="password" name="password" required
