@@ -18,8 +18,8 @@ class ShopSeeder extends Seeder
         for ($i = 1; $i < 21; $i++) {
             DB::table('shops')->insert([
                 'owner_id' => $i,
-                'name' => 'ここに店名が入ります',
-                'information' => 'ここに店名が入ります。ここに店名が入ります。ここに店名が入ります。',
+                'name' => 'shop' . $i,
+                'information' => '店舗情報' . $i,
                 'filename' => '',
                 'is_selling' => true
             ]);
