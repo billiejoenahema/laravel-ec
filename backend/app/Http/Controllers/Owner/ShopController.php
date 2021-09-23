@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller
 {
@@ -30,7 +31,7 @@ class ShopController extends Controller
     public function index()
     {
         $shops = Shop::where('owner_id', Auth::id())->get();
-
+        dd($shops);
         return view(
             'owner.shops.index',
             compact(['shops'])
@@ -39,9 +40,17 @@ class ShopController extends Controller
 
     public function edit($id)
     {
+        $shop = Shop::findOrFail($id);
+        return view('owner.shops.edit', compact('shop'));
     }
 
     public function update(Request $request)
     {
+        $imageFile = $request->image;
+        if (!is_null($imageFile) && $imageFile->isValid()) {
+            Storage::putFile('public/shops', $imageFile);
+            dd($imageFile);
+        }
+        return redirect()->route('owner.shops.index');
     }
 }
