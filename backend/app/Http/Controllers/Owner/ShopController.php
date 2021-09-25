@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UploadImageRequest;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,6 @@ class ShopController extends Controller
     public function index()
     {
         $shops = Shop::where('owner_id', Auth::id())->get();
-        dd($shops);
         return view(
             'owner.shops.index',
             compact(['shops'])
@@ -44,12 +44,11 @@ class ShopController extends Controller
         return view('owner.shops.edit', compact('shop'));
     }
 
-    public function update(Request $request)
+    public function update(UploadImageRequest $request)
     {
         $imageFile = $request->image;
         if (!is_null($imageFile) && $imageFile->isValid()) {
             Storage::putFile('public/shops', $imageFile);
-            dd($imageFile);
         }
         return redirect()->route('owner.shops.index');
     }
