@@ -44,9 +44,30 @@ class ShopController extends Controller
         return view('owner.shops.edit', compact('shop'));
     }
 
-    public function update(UploadImageRequest $request)
+    public function update(UploadImageRequest $request, $id)
     {
-        ImageService::upload($request, 'shops');
-        return redirect()->route('owner.shops.index');
+        $request->validate([
+            'name' => ['required', 'string', 'max:50'],
+            'information' => ['required', 'string', 'max:1000'],
+            'is_selling' => ['required'],
+        ]);
+
+        $imageFile = ImageService::upload($request);
+
+        $shop = Shop::findOrFail($id);
+        $shop->name = $request->name;
+        $shop->information = $request->information;
+        $shop->is_selling = $request->is_selling;
+        if (!is_null($imageFile)) {
+            $shop->filename = $imageFile;
+        }
+
+        $shop->save();
+
+        return redirect()->route('owner.shops.index')
+            ->with([
+                'message' => '店舗情報を更新しました。',
+                'toast-color' => 'green-500'
+            ]);
     }
 }

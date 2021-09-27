@@ -11,7 +11,10 @@ RUN apt-get update && \
     apt-get clean && \
     apt-get -y install vim && \
     rm -rf /var/lib/apt/lists/* && \
-    docker-php-ext-install intl pdo_mysql zip bcmath
+    docker-php-ext-install intl pdo_mysql zip bcmath \
+    chown -R www-data:www-data /var/www \
+    chmod -R 775 storage \
+    chmod -R 775 bootstrap/cache
 
 # Node.jsをインストール
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
