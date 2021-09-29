@@ -6,12 +6,17 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageService
 {
-    public static function upload($request)
+    public static function upload($imageFile, $dir)
     {
-        $imageFile = $request->image;
-        if (!is_null($imageFile) && $imageFile->isValid()) {
-            $imageFilePath = Storage::putFile('/public/shops', $imageFile);
-            return str_replace('public/shops/', '', $imageFilePath);
+        if (is_array($imageFile)) {
+            $file = $imageFile['image'];
+        } else {
+            $file = $imageFile;
+        }
+
+        if (!is_null($file) && $file->isValid()) {
+            $imageFilePath = Storage::putFile('/public/' . $dir, $file);
+            return str_replace('public/' . $dir . '/', '', $imageFilePath);
         }
         return;
     }

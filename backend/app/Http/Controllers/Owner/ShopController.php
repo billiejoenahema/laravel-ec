@@ -52,14 +52,15 @@ class ShopController extends Controller
             'is_selling' => ['required'],
         ]);
 
-        $imageFile = ImageService::upload($request);
+        $imageFile = $request->image;
+        $fileName = ImageService::upload($imageFile, 'shops');
 
         $shop = Shop::findOrFail($id);
         $shop->name = $request->name;
         $shop->information = $request->information;
         $shop->is_selling = $request->is_selling;
-        if (!is_null($imageFile)) {
-            $shop->filename = $imageFile;
+        if (!is_null($fileName)) {
+            $shop->filename = $fileName;
         }
 
         $shop->save();

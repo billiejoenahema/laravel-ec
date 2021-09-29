@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UploadImageRequest;
 use App\Models\Image;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,18 +52,33 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        return view('owner.images.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UploadImageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UploadImageRequest $request)
     {
-        //
+        $imageFiles = $request->file('files');
+        if (is_null($imageFiles)) return;
+
+        foreach ($imageFiles as $imageFile) {
+            $fileName = ImageService::upload($imageFile, 'products');
+            Image::create([
+                'owner_id' => Auth::id(),
+                'filename' => $fileName
+            ]);
+        }
+
+        return redirect()->route('owner.images.index')
+            ->with([
+                'message' => '画像を登録しました。',
+                'toast-color' => 'green-500'
+            ]);
     }
 
     /**
