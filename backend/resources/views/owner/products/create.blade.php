@@ -29,6 +29,7 @@
                                     </select>
                                 </div>
                             </div>
+                            <x-select-image :images="$images" name="image1" />
                             <div class="p-2 w-full flex justify-around mt-4">
                                 <button type="button" onClick="location.href='{{route('owner.products.index')}}'"
                                     class="text-white bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
@@ -41,4 +42,22 @@
             </div>
         </div>
     </div>
+    <script>
+        'use strict'
+        const images = document.querySelectorAll('.image')
+        console.log(image)
+
+        images.forEach( image =>  {
+            image.addEventListener('click', function(e){
+            const imageName = e.target.dataset.id.substr(0, 6)
+            const imageId = e.target.dataset.id.replace(imageName + '_', '')
+            const imageFile = e.target.dataset.file
+            const imagePath = e.target.dataset.path
+            const modal = e.target.dataset.modal
+            document.getElementById(imageName + '_thumbnail').src = imagePath + '/' + imageFile
+            document.getElementById(imageName + '_hidden').value = imageId
+            MicroModal.close(modal);
+        }, )
+        })
+    </script>
 </x-app-layout>
