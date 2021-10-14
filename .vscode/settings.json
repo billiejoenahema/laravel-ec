@@ -1,3 +1,8 @@
 {
-  "cSpell.words": ["devcontainer"]
+  "cSpell.words": [
+      "devcontainer"
+    ],
+  "files.associations": {
+    "*.blade.php": "html"
+  },
 }

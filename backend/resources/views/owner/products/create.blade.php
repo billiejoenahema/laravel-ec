@@ -109,3 +109,7 @@
           MicroModal.close(modal);
       }, )
       })
+
+    </script>
+
+</x-app-layout>
