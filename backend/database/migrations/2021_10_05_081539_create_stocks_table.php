@@ -21,7 +21,7 @@ class CreateStocksTable extends Migration
                 ->onDelete('cascade');
             $table->tinyInteger('type');
             $table->integer('quantity');
-            $$table->timestamps();
+            $table->timestamps();
         });
     }
 
