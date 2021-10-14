@@ -1,8 +1,20 @@
 {
-  "cSpell.words": [
-      "devcontainer"
+    "cSpell.words": [
+        "devcontainer"
     ],
-  "files.associations": {
-    "*.blade.php": "html"
-  },
+    "files.associations": {
+        "*.blade.php": "html"
+    },
+    "[php]": {
+        "editor.tabSize": 4
+    },
+    "[javascript]": {
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "blade.format.enable": true,
+    "[blade]": {
+        "editor.defaultFormatter": "onecentlin.laravel-blade",
+        "editor.formatOnSave": true,
+    },
 }
