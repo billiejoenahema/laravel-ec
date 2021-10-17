@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Stock;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Product;
 
 class StockFactory extends Factory
 {
@@ -23,9 +22,9 @@ class StockFactory extends Factory
     public function definition()
     {
         return [
-            'product_id' => Product::factory(),
+            'product_id' => $this->faker->numberBetween(1, 100),
             'type' => $this->faker->numberBetween(1, 2),
-            'quantity' => $this->faker->randomNumber,
+            'quantity' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

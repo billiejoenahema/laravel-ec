@@ -135,9 +135,6 @@ class ProductController extends Controller
         $categories = PrimaryCategory::with('secondary')
             ->get();
 
-        dd(Stock::where('product_id', 1)
-            ->sum('quantity'));
-
         return view(
             'owner.products.edit',
             compact('product', 'quantity', 'shops', 'images', 'categories')
