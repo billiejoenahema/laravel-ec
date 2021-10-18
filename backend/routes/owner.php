@@ -25,10 +25,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('owner.welcome');
-});
-
 Route::prefix('shops')->middleware('auth:owners')->group(function () {
     Route::get('index', [ShopController::class, 'index'])
         ->name('shops.index');
@@ -47,15 +43,6 @@ Route::resource('products', ProductController::class)
 Route::get('/dashboard', function () {
     return view('owner.dashboard');
 })->middleware(['auth:owners'])->name('dashboard');
-
-
-
-Route::get('/register', [RegisteredUserController::class, 'create'])
-    ->middleware('guest')
-    ->name('register');
-
-Route::post('/register', [RegisteredUserController::class, 'store'])
-    ->middleware('guest');
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
@@ -102,3 +89,15 @@ Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth:owner')
     ->name('logout');
+
+
+// Owner自身で新規登録はできないため不要
+// Route::get('/', function () {
+//     return view('owner.welcome');
+// });
+// Route::get('/register', [RegisteredUserController::class, 'create'])
+//     ->middleware('guest')
+//     ->name('register');
+
+// Route::post('/register', [RegisteredUserController::class, 'store'])
+//     ->middleware('guest');
