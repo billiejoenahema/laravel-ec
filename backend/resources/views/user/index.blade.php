@@ -71,9 +71,9 @@
 
                         @foreach($products as $product)
                         <div class="w-full lg:w-1/4 p-2 md:p-4">
-                            <a href="{{ route('user.items.show', ['item' => $product->id ])}}">
+                            <a href="#">
                                 <div class="border rounded-md p-2 md:p-4">
-                                    <x-thumbnail filename="{{$product->filename ?? ''}}" type="products" />
+                                    <x-thumbnail filename="{{$product->filename ?? ''}}" path="products" />
                                     <div class="mt-4">
                                         <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{
                                             $product->category }}</h3>

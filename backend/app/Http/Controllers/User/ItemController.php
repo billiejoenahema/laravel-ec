@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\PrimaryCategory;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -12,9 +14,21 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('user.index');
+        $categories = PrimaryCategory::with('secondary')
+            ->get();
+
+        $products = Product::availableItems()
+            ->selectCategory($request->category ?? '0')
+            ->searchKeyword($request->keyword)
+            ->sortOrder($request->sort)
+            ->paginate($request->pagination ?? '20');
+
+        return view(
+            'user.index',
+            compact('products', 'categories')
+        );
     }
 
     /**
