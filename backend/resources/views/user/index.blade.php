@@ -71,7 +71,7 @@
 
                         @foreach($products as $product)
                         <div class="w-full lg:w-1/4 p-2 md:p-4">
-                            <a href="#">
+                            <a href="{{ route('user.items.show', ['item' => $product->id ])}}">
                                 <div class="border rounded-md p-2 md:p-4">
                                     <x-thumbnail filename="{{$product->filename ?? ''}}" path="products" />
                                     <div class="mt-4">
@@ -105,6 +105,5 @@
         paginate.addEventListener('change', function () {
             this.form.submit()
         })
-
     </script>
 </x-app-layout>
