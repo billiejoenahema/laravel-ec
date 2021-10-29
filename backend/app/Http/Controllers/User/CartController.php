@@ -122,4 +122,36 @@ class CartController extends Controller
         return view('user.checkout',
             compact('session', 'publicKey'));
     }
+
+    public function success()
+    {
+        $items = Cart::where('user_id', Auth::id())->get();
+        $products = CartService::getItemsInCart($items);
+        $user = User::findOrFail(Auth::id());
+
+        SendThanksMail::dispatch($products, $user);
+        foreach($products as $product)
+        {
+            SendOrderedMail::dispatch($product, $user);
+        }
+
+        Cart::where('user_id', Auth::id())->delete();
+
+        return redirect()->route('user.items.index');
+    }
+
+    public function cancel()
+    {
+        $user = User::findOrFail(Auth::id());
+
+        foreach($user->products as $product){
+            Stock::create([
+                'product_id' => $product->id,
+                'type' => \Constant::PRODUCT_LIST['add'],
+                'quantity' => $product->pivot->quantity
+            ]);
+        }
+
+        return redirect()->route('user.cart.index');
+    }
 }
