@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Stock;
 use App\Models\User;
+use App\Services\CartService;
+use App\Jobs\SendThanksMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
