@@ -8,6 +8,7 @@ use App\Models\Stock;
 use App\Models\User;
 use App\Services\CartService;
 use App\Jobs\SendThanksMail;
+use App\Jobs\SendOrderedMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -108,8 +109,7 @@ class CartController extends Controller
                 'quantity' => $product->pivot->quantity * -1
             ]);
         }
-
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        \Stripe\Stripe::setApiKey(config('app.stripe_secret_key'));
 
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
@@ -119,7 +119,7 @@ class CartController extends Controller
             'cancel_url' => route('user.cart.cancel'),
         ]);
 
-        $publicKey = env('STRIPE_PUBLIC_KEY');
+        $publicKey = config('app.stripe_public_key');
 
         return view('user.checkout',
             compact('session', 'publicKey'));
