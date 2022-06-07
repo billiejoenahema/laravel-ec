@@ -21,7 +21,7 @@
         "tailwindcss": "2.2.11"
     },
     "dependencies": {
-        "micromodal": "0.4.6",
+        "micromodal": "0.4.10",
         "npm": "8.12.1",
         "swiper": "6.8.4"
     }
