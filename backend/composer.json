@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "fruitcake/laravel-cors": "2.2.0",
-        "guzzlehttp/guzzle": "7.4.3",
+        "guzzlehttp/guzzle": "7.4.4",
         "intervention/image": "2.7.2",
         "laravel/framework": "8.83.16",
         "laravel/sanctum": "2.15.1",
