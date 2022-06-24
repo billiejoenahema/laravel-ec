@@ -6,7 +6,7 @@ services:
       - ./backend:/work
 
   web:
-    image: nginx:1.22-alpine
+    image: nginx:1.23-alpine
     ports:
       - 8080:80
     volumes:
