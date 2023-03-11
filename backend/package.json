@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "micromodal": "0.4.10",
-        "npm": "8.13.2",
+        "npm": "8.19.4",
         "swiper": "8.2.6"
     }
 }
